@@ -35,6 +35,7 @@ app.get('/',(request,response)=>{
 app.get('/getUsers',account.getUsers)
 app.get('/getUsers/:id',account.getUserById)
 app.get('/userCheck',account.userCheck)
+app.get('/test',account.testConnection)
 
 app.post('/createUsers',account.createUsers)
 app.post('/pay',payment.makePayment)

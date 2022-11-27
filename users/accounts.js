@@ -10,13 +10,22 @@ const pool = new Pool({
   host: process.env.PGHOST,
   database: process.env.PGDATABSE,
   password: process.env.PGPASSWORD,
-  port: 5432,
+  port: process.env.PGPORT,
 })
 pool.connect(function(err) {
   if (err) throw err;
   console.log("Database Connected!");
 });
 
+
+/* Test API */
+
+const testConnection = (request,response)=>{
+  if(error){
+    throw error
+  }
+  response.status(200).json('Test Success');
+}
 
 
 /* Get all users details */
@@ -30,6 +39,7 @@ const getUsers = (request, response) => {
   });
   
 }
+
 
 /*Get user with email and contact */
 const userCheck =(request,response)=>{
@@ -94,7 +104,7 @@ const createUsers = (request, response) => {
   const deleteUser=(request,response)=>{
     const id=parseInt(request.params.id)
 
-    pool.query('DELETE FROM tbl_users where accoutn_id=$1',[id],(error,results)=>{
+    pool.query('DELETE FROM tbl_userdata where accoutn_id=$1',[id],(error,results)=>{
       if(error){
         throw error
       }
@@ -103,5 +113,5 @@ const createUsers = (request, response) => {
   }
 
 
-  module.exports={createUsers,getUsers,getUserById,deleteUser,userCheck,pool}
+  module.exports={createUsers,getUsers,getUserById,deleteUser,userCheck,testConnection,pool}
 
